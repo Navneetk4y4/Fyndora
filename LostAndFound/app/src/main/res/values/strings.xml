@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">LostAndFound</string>
+    <string name="settings">Settings</string>
+    <string name="report_lost_item">Report Lost Item</string>
+    <string name="report_lost_item_desc">Help us find what you lost.</string>
+    <string name="found_something">Found Something?</string>
+    <string name="found_something_desc">Post it to help others.</string>
+    <string name="search_icon_desc">Search</string>
+    <string name="handshake_icon_desc">Handshake</string>
+</resources>
