@@ -58,6 +58,12 @@ class Home : AppCompatActivity() {
         fabReportFraud.setOnClickListener {
             startActivity(Intent(this, ReportFraudActivity::class.java))
         }
+
+        val fabChatbot: FloatingActionButton = findViewById(R.id.fabChatbot)
+        fabChatbot.setOnClickListener {
+            val chatbotDialogFragment = ChatbotDialogFragment()
+            chatbotDialogFragment.show(supportFragmentManager, "ChatbotDialogFragment")
+        }
     }
 
     private fun showSettingsPopup(anchor: MaterialToolbar) {
