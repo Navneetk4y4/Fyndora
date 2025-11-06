@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        app:title="Fyndora"
+        app:title="Fyndoraa"
         app:titleCentered="true"
         app:titleTextColor="#3D3D3D"
         app:titleTextAppearance="@style/ToolbarTitleStyle"
