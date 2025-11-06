@@ -12,6 +12,7 @@ class ReportFraudActivity : AppCompatActivity() {
 
     private lateinit var editTextName: EditText
     private lateinit var editTextEmail: EditText
+    private lateinit var editTextDescription: EditText
     private lateinit var buttonSubmit: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +26,7 @@ class ReportFraudActivity : AppCompatActivity() {
 
         editTextName = findViewById(R.id.editTextName)
         editTextEmail = findViewById(R.id.editTextEmail)
+        editTextDescription = findViewById(R.id.editTextDescription)
         buttonSubmit = findViewById(R.id.buttonSubmit)
 
         buttonSubmit.setOnClickListener {
@@ -35,8 +37,9 @@ class ReportFraudActivity : AppCompatActivity() {
     private fun submitReport() {
         val name = editTextName.text.toString().trim()
         val email = editTextEmail.text.toString().trim()
+        val description = editTextDescription.text.toString().trim()
 
-        if (name.isEmpty() || email.isEmpty()) {
+        if (name.isEmpty() || email.isEmpty() || description.isEmpty()) {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
             return
         }
@@ -45,7 +48,7 @@ class ReportFraudActivity : AppCompatActivity() {
         val reportsRef = database.getReference("reports")
 
         val reportId = reportsRef.push().key
-        val report = Report(name, email)
+        val report = Report(name, email, description)
 
         if (reportId != null) {
             reportsRef.child(reportId).setValue(report)
@@ -59,5 +62,5 @@ class ReportFraudActivity : AppCompatActivity() {
         }
     }
 
-    data class Report(val name: String, val email: String)
+    data class Report(val name: String, val email: String, val description: String)
 }
