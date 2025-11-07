@@ -2,14 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="350dp"
-<<<<<<< HEAD
     android:layout_height="210dp"
-    android:background="@drawable/dialog_chatbot_background">
-=======
-    android:layout_height="500dp"
     android:orientation="vertical"
-    android:background="@drawable/glassmorphic_background">
->>>>>>> 79fb0bc (chatbot ui)
+    android:background="@drawable/dialog_chatbot_background">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbarChat"
@@ -50,11 +45,8 @@
             android:layout_height="48dp"
             android:src="@drawable/ic_send"
             android:background="?attr/selectableItemBackgroundBorderless"
-<<<<<<< HEAD
-            android:contentDescription="Send" />
-=======
+            android:contentDescription="Send"
             android:layout_marginStart="8dp"/>
->>>>>>> 79fb0bc (chatbot ui)
 
     </LinearLayout>
 
