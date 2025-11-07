@@ -45,7 +45,7 @@ class ChatbotDialogFragment : DialogFragment() {
     A: On the "Lost Items" or "Found Items" screens, there is a search bar at the top. You can type keywords like 'black wallet' or 'keys' to filter the list and find what you're looking for more easily.
 
     Q: What happens when I report someone for fraud? OR How can I report a malicious user?
-    A: When you use the 'Report Fraud' button, our moderation team is notified. We will investigate the report to determine if a user has violated our policies. This helps protect the community. You can find the 'Report Fraud' button on the item details page if you suspect any malicious activity.
+    A: When you use the 'Report Fraud' button on the item details page, our moderation team is notified. We will investigate the report to determine if a user has violated our policies. This is the correct way to report a malicious user or suspicious activity and helps protect the community.
 
     Q: Can I change my profile picture or name?
     A: Yes, absolutely. Navigate to your profile screen and tap the "Edit Profile" button. You can update your name and select a new profile avatar there.
