@@ -21,8 +21,8 @@ class SignUpActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
 
-        val nameEditText: EditText = findViewById(R.id.et_name)
-        val emailEditText: EditText = findViewById(R.id.et_email)
+        val nameEditText: EditText = findViewById(R.id.et_name_signup)
+        val emailEditText: EditText = findViewById(R.id.et_email_signup)
         val uniRegNoEditText: EditText = findViewById(R.id.et_uni_reg_no_signup)
         val passwordEditText: EditText = findViewById(R.id.et_password_signup)
         val confirmPasswordEditText: EditText = findViewById(R.id.et_confirm_password)

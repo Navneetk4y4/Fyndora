@@ -24,6 +24,7 @@ class LoginActivity : AppCompatActivity() {
         val passwordEditText: EditText = findViewById(R.id.et_password)
         val loginButton: Button = findViewById(R.id.btn_login)
         val signUpTextView: TextView = findViewById(R.id.tv_signup)
+        val forgotPasswordTextView: TextView = findViewById(R.id.tv_forgot_password)
 
         // Login button click
         loginButton.setOnClickListener {
@@ -52,6 +53,11 @@ class LoginActivity : AppCompatActivity() {
         // Sign Up text click
         signUpTextView.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
+        }
+
+        // Forgot Password text click
+        forgotPasswordTextView.setOnClickListener {
+            startActivity(Intent(this, ForgotPasswordActivity::class.java))
         }
     }
 }
