@@ -6,27 +6,30 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ChatAdapter(private val messages: List<Pair<String, Boolean>>) : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
+class ChatAdapter(private val messages: List<Pair<String, Boolean>>) : RecyclerView.Adapter<ChatAdapter.MessageViewHolder>() {
 
-    // true for user, false for bot
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val messageText: TextView = view.findViewById(android.R.id.text1)
+    companion object {
+        private const val VIEW_TYPE_USER = 1
+        private const val VIEW_TYPE_BOT = 2
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val layout = if (viewType == 0) android.R.layout.simple_list_item_1 else android.R.layout.simple_list_item_2
-        val view = inflater.inflate(layout, parent, false)
-        return ViewHolder(view)
+    override fun getItemViewType(position: Int): Int {
+        return if (messages[position].second) VIEW_TYPE_USER else VIEW_TYPE_BOT
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
+        val layout = if (viewType == VIEW_TYPE_USER) R.layout.item_chat_user else R.layout.item_chat_bot
+        val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
+        return MessageViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
         holder.messageText.text = messages[position].first
     }
 
     override fun getItemCount() = messages.size
 
-    override fun getItemViewType(position: Int): Int {
-        return if (messages[position].second) 0 else 1
+    class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val messageText: TextView = itemView.findViewById(R.id.textViewMessage)
     }
 }

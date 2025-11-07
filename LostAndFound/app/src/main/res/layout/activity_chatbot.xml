@@ -1,36 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/home_background_gradient">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/home_background_gradient"
+    tools:context=".ChatbotActivity">
 
+    <!-- Chat messages list -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewChat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/inputLayout"
-        android:padding="16dp" />
+        android:padding="16dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never" />
 
+    <!-- Message input section -->
     <LinearLayout
         android:id="@+id/inputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:background="@drawable/glassmorphic_background"
+        android:elevation="8dp">
 
         <EditText
             android:id="@+id/editTextMessage"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="1"
-            android:hint="Ask a question..." />
+            android:background="@drawable/glassmorphic_edittext_bg"
+            android:hint="Ask something..."
+            android:padding="12dp"
+            android:textColor="@android:color/black"
+            android:textColorHint="#808080"
+            android:inputType="text"
+            android:layout_marginEnd="8dp" />
 
-        <Button
+        <ImageButton
             android:id="@+id/buttonSend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Send" />
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/glassmorphic_button_bg"
+            android:src="@drawable/ic_send"
+            android:contentDescription="Send Message"
+            app:tint="@android:color/white" />
 
     </LinearLayout>
 
