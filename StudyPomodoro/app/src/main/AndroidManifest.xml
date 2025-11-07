@@ -34,6 +34,15 @@
         <activity
             android:name=".ForgotPasswordActivity"
             android:exported="true" />
+        <activity
+            android:name=".TaskListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".StatisticsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
