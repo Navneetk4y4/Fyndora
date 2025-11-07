@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.ai.client.generativeai.GenerativeModel
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.launch
 
 class ChatbotDialogFragment : DialogFragment() {
 
@@ -30,7 +31,7 @@ class ChatbotDialogFragment : DialogFragment() {
 
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerViewChat)
         val inputMessage: EditText = view.findViewById(R.id.editTextMessage)
-        val sendButton: Button = view.findViewById(R.id.buttonSend)
+        val sendButton: ImageButton = view.findViewById(R.id.buttonSend)
 
         adapter = ChatAdapter(messages)
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -43,12 +44,16 @@ class ChatbotDialogFragment : DialogFragment() {
                 adapter.notifyItemInserted(messages.size - 1)
                 inputMessage.text.clear()
 
-                // You will need to add your API key here
-                val generativeModel = GenerativeModel("gemini-pro", "YOUR_API_KEY")
-                runBlocking {
-                    val response = generativeModel.generateContent(message).text
-                    messages.add(Pair(response ?: "", false))
-                    adapter.notifyItemInserted(messages.size - 1)
+                val generativeModel = GenerativeModel("gemini-1.5-flash-latest", "AIzaSyCQr3_2nhQbq1ahxqHLpLgBpqgc328U5lw")
+                viewLifecycleOwner.lifecycleScope.launch {
+                    try {
+                        val response = generativeModel.generateContent(message).text
+                        messages.add(Pair(response ?: "", false))
+                        adapter.notifyItemInserted(messages.size - 1)
+                    } catch (e: Exception) {
+                        messages.add(Pair("Error: ${e.message}", false))
+                        adapter.notifyItemInserted(messages.size - 1)
+                    }
                 }
             }
         }

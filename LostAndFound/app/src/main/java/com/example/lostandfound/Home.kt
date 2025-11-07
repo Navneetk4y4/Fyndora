@@ -1,10 +1,13 @@
 package com.example.lostandfound
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
+import android.view.Gravity
+import android.view.View
 import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.ContextThemeWrapper
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.card.MaterialCardView
@@ -27,7 +30,8 @@ class Home : AppCompatActivity() {
         topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_settings -> {
-                    showSettingsPopup(topAppBar)
+                    val anchorView = topAppBar.findViewById<View>(R.id.menu_settings)
+                    showSettingsPopup(anchorView ?: topAppBar)
                     true
                 }
                 else -> false
@@ -66,8 +70,9 @@ class Home : AppCompatActivity() {
         }
     }
 
-    private fun showSettingsPopup(anchor: MaterialToolbar) {
-        val popup = PopupMenu(this, anchor)
+    private fun showSettingsPopup(anchor: View) {
+        val wrapper: Context = ContextThemeWrapper(this, R.style.CustomPopupMenu)
+        val popup = PopupMenu(wrapper, anchor, Gravity.END)
         popup.menuInflater.inflate(R.menu.settings_popup, popup.menu)
 
         popup.setOnMenuItemClickListener { item ->

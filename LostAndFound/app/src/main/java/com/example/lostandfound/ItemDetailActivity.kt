@@ -13,21 +13,29 @@ import androidx.appcompat.widget.Toolbar
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 class ItemDetailActivity : AppCompatActivity() {
 
     private var perName: String? = null
     private var perRegNo: String? = null
     private var perDetails: String? = null
+    private lateinit var auth: FirebaseAuth
+    private lateinit var database: FirebaseDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_detail)
 
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
+
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        val itemId = intent.getStringExtra("ITEM_ID")
         val itemName = intent.getStringExtra("ITEM_NAME")
         val itemDescription = intent.getStringExtra("ITEM_DESCRIPTION")
         val itemImageUrl = intent.getStringExtra("ITEM_IMAGE_URL")
@@ -56,11 +64,11 @@ class ItemDetailActivity : AppCompatActivity() {
         }
 
         fabClaim.setOnClickListener {
-            showClaimConfirmationDialog()
+            showClaimConfirmationDialog(itemId)
         }
     }
 
-    private fun showClaimConfirmationDialog() {
+    private fun showClaimConfirmationDialog(itemId: String?) {
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_claim_confirmation, null)
         val checkBox: CheckBox = dialogView.findViewById(R.id.checkbox_agree)
 
@@ -81,14 +89,20 @@ class ItemDetailActivity : AppCompatActivity() {
 
             okButton.setOnClickListener {
                 dialog.dismiss()
-                showContactDetailsDialog()
+                showContactDetailsDialog(itemId)
             }
         }
 
         dialog.show()
     }
 
-    private fun showContactDetailsDialog() {
+    private fun showContactDetailsDialog(itemId: String?) {
+        val currentUser = auth.currentUser
+        if (currentUser != null && itemId != null) {
+            val foundItemsRef = database.getReference("FoundItems").child(itemId)
+            foundItemsRef.child("claimedBy").setValue(currentUser.uid)
+        }
+
         val contactInfo = "Name: $perName\nRegistration No: $perRegNo\nContact: $perDetails"
 
         AlertDialog.Builder(this)

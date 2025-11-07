@@ -85,7 +85,16 @@ class ProfileActivity : AppCompatActivity() {
             }
         })
 
-        // Placeholder for Items Claimed Count
-        itemsClaimedCountTextView.text = "0"
+        // Fetch Items Claimed Count
+        foundItemsRef.orderByChild("claimedBy").equalTo(userId).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val itemsClaimedCount = snapshot.childrenCount
+                itemsClaimedCountTextView.text = itemsClaimedCount.toString()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                itemsClaimedCountTextView.text = "0"
+            }
+        })
     }
 }
