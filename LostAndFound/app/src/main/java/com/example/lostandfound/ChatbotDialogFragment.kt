@@ -1,5 +1,7 @@
 package com.example.lostandfound
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.ai.client.generativeai.GenerativeModel
+import com.google.ai.client.generativeai.type.generationConfig
 import kotlinx.coroutines.launch
 
 class ChatbotDialogFragment : DialogFragment() {
@@ -23,6 +26,7 @@ class ChatbotDialogFragment : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         return inflater.inflate(R.layout.dialog_chatbot, container, false)
     }
 
@@ -44,7 +48,14 @@ class ChatbotDialogFragment : DialogFragment() {
                 adapter.notifyItemInserted(messages.size - 1)
                 inputMessage.text.clear()
 
-                val generativeModel = GenerativeModel("gemini-1.5-flash-latest", "AIzaSyCQr3_2nhQbq1ahxqHLpLgBpqgc328U5lw")
+                val generativeModel = GenerativeModel(
+                    modelName = "gemini-2.0-flash",
+                    apiKey = "AIzaSyCQr3_2nhQbq1ahxqHLpLgBpqgc328U5lw",
+                    generationConfig = generationConfig {
+                        temperature = 0.9f
+                    }
+                )
+
                 viewLifecycleOwner.lifecycleScope.launch {
                     try {
                         val response = generativeModel.generateContent(message).text
