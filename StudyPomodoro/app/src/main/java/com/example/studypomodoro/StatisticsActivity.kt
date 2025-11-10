@@ -5,15 +5,12 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 
 class StatisticsActivity : AppCompatActivity() {
 
     private lateinit var totalPomodorosTextView: TextView
     private lateinit var totalStudyTimeTextView: TextView
-    private lateinit var tasksCompletedTextView: TextView
     private lateinit var backToTaskListButton: Button
-    private lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,12 +18,7 @@ class StatisticsActivity : AppCompatActivity() {
 
         totalPomodorosTextView = findViewById(R.id.tv_total_pomodoros)
         totalStudyTimeTextView = findViewById(R.id.tv_total_study_time)
-        tasksCompletedTextView = findViewById(R.id.tv_tasks_completed)
         backToTaskListButton = findViewById(R.id.btn_back_to_task_list)
-        toolbar = findViewById(R.id.toolbar_statistics)
-
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         loadStats()
 
@@ -39,18 +31,18 @@ class StatisticsActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("stats", Context.MODE_PRIVATE)
         val totalPomodoros = sharedPreferences.getInt("total_pomodoros", 0)
         val totalStudyTime = sharedPreferences.getInt("total_study_time", 0)
-        val tasksCompleted = sharedPreferences.getInt("tasks_completed", 0)
 
-        val hours = totalStudyTime / 3600
-        val minutes = (totalStudyTime % 3600) / 60
+        val hours = totalStudyTime / 60
+        val minutes = totalStudyTime % 60
 
-        tasksCompletedTextView.text = "Tasks completed today: $tasksCompleted"
-        totalPomodorosTextView.text = "Total Pomodoros: $totalPomodoros"
-        totalStudyTimeTextView.text = "Total Focus Time: $hours hours"
+        totalPomodorosTextView.text = "Total Pomodoros today: $totalPomodoros"
+        totalStudyTimeTextView.text = "Total study time: $hours hrs $minutes mins"
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
+    private fun resetStats() {
+        val sharedPreferences = getSharedPreferences("stats", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply()
     }
 }

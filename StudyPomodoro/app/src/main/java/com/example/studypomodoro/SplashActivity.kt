@@ -19,11 +19,12 @@ class SplashActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             if (auth.currentUser != null) {
-                startActivity(Intent(this, TaskListActivity::class.java))
+                // FIX: Navigate to MainActivity
+                startActivity(Intent(this, MainActivity::class.java))
             } else {
                 startActivity(Intent(this, LoginActivity::class.java))
             }
             finish()
-        }, 3000) // 3-second delay
+        }, 2000)
     }
 }

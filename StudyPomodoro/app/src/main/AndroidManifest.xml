@@ -35,14 +35,11 @@
             android:name=".ForgotPasswordActivity"
             android:exported="true" />
         <activity
-            android:name=".TaskListActivity"
+            android:name=".TaskDetailActivity"
             android:exported="true" />
-        <activity
-            android:name=".StatisticsActivity"
-            android:exported="true" />
-        <activity
-            android:name=".SettingsActivity"
-            android:exported="true" />
+
+        <service android:name=".MusicService" />
+
     </application>
 
 </manifest>

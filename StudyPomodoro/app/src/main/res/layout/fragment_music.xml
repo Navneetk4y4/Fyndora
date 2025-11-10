@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_cute_gradient"
+    tools:context=".MusicFragment">
+
+    <ImageView
+        android:id="@+id/iv_album_art"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/ic_app_design" />
+
+    <TextView
+        android:id="@+id/tv_track_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_album_art"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Lofi Beats"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tv_artist_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_track_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif-light"
+        android:text="Study Pomodoro"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <SeekBar
+        android:id="@+id/seek_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_artist_name"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="24dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/seek_bar"
+        android:layout_marginTop="24dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="32dp">
+
+        <ImageButton
+            android:id="@+id/btn_previous_music"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_skip_previous"
+            app:tint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/btn_play_pause_music"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_play_arrow"
+            app:tint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/btn_next_music"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_skip_next"
+            app:tint="@color/white" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="16dp">
+
+    <ImageView
+        android:id="@+id/iv_task_status"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_check_circle" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/iv_task_status"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:id="@+id/tv_task_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UX Member Payment"
+            android:textColor="@color/new_text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_task_project"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Microsoft Product Design"
+            android:textColor="@color/new_text_secondary"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_task_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:text="09:20 am"
+        android:textColor="@color/new_text_secondary"
+        android:textSize="14sp" />
+
+</RelativeLayout>

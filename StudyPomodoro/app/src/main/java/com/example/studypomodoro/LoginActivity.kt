@@ -37,6 +37,7 @@ class LoginActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
+                        // FIX: Navigate to MainActivity
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     } else {

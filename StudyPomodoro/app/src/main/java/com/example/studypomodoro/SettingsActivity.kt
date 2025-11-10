@@ -12,7 +12,6 @@ class SettingsActivity : AppCompatActivity() {
 
     private lateinit var focusDurationEditText: EditText
     private lateinit var breakDurationEditText: EditText
-    private lateinit var longBreakDurationEditText: EditText
     private lateinit var saveButton: Button
     private lateinit var toolbar: Toolbar
 
@@ -22,7 +21,6 @@ class SettingsActivity : AppCompatActivity() {
 
         focusDurationEditText = findViewById(R.id.et_focus_duration)
         breakDurationEditText = findViewById(R.id.et_break_duration)
-        longBreakDurationEditText = findViewById(R.id.et_long_break_duration)
         saveButton = findViewById(R.id.btn_save_settings)
         toolbar = findViewById(R.id.toolbar_settings)
 
@@ -40,24 +38,20 @@ class SettingsActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("settings", Context.MODE_PRIVATE)
         val focusDuration = sharedPreferences.getInt("focus_duration", 25)
         val breakDuration = sharedPreferences.getInt("break_duration", 5)
-        val longBreakDuration = sharedPreferences.getInt("long_break_duration", 15)
 
         focusDurationEditText.setText(focusDuration.toString())
         breakDurationEditText.setText(breakDuration.toString())
-        longBreakDurationEditText.setText(longBreakDuration.toString())
     }
 
     private fun saveSettings() {
         val focusDuration = focusDurationEditText.text.toString().toIntOrNull()
         val breakDuration = breakDurationEditText.text.toString().toIntOrNull()
-        val longBreakDuration = longBreakDurationEditText.text.toString().toIntOrNull()
 
-        if (focusDuration != null && breakDuration != null && longBreakDuration != null) {
+        if (focusDuration != null && breakDuration != null) {
             val sharedPreferences = getSharedPreferences("settings", Context.MODE_PRIVATE)
             val editor = sharedPreferences.edit()
             editor.putInt("focus_duration", focusDuration)
             editor.putInt("break_duration", breakDuration)
-            editor.putInt("long_break_duration", longBreakDuration)
             editor.apply()
             Toast.makeText(this, "Settings saved", Toast.LENGTH_SHORT).show()
             finish()

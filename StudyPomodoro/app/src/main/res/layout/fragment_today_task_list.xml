@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".TodayTaskListFragment">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:background="@drawable/bg_header_gradient">
+
+        <TextView
+            android:id="@+id/tv_month_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="48dp"
+            android:text="July 2019"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/iv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/tv_month_year"
+            android:layout_alignBottom="@id/tv_month_year"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/ic_new_search"
+            app:tint="@color/white" />
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_month_year"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_search_bar"
+            android:drawableStart="@drawable/ic_new_search"
+            android:drawablePadding="12dp"
+            android:hint="Search task"
+            android:paddingHorizontal="20dp"
+            android:visibility="gone"/>
+
+        <HorizontalScrollView
+            android:id="@+id/hsv_week"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="16dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/ll_week_days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="24dp" />
+        </HorizontalScrollView>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_task_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:text="Task"
+        android:textColor="@color/new_text_primary"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_tasks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tv_task_title"
+        android:layout_marginTop="16dp"
+        android:paddingHorizontal="24dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="24dp"
+        android:src="@drawable/ic_new_add"
+        app:backgroundTint="@color/new_primary_purple"
+        app:shapeAppearanceOverlay="@style/FabShape" />
+
+</RelativeLayout>

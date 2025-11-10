@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_glossy_gradient"
+    tools:context=".StatisticsFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_statistics"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/transparent"
+        app:title="Statistics"
+        app:titleTextColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/tv_tasks_completed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar_statistics"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Tasks completed today: 0"
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tv_total_pomodoros"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_tasks_completed"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Total Pomodoros: 0"
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tv_total_study_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_total_pomodoros"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Total Focus Time: 0 hours"
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tv_motivational_quote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_total_study_time"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:fontFamily="sans-serif-light"
+        android:textAlignment="center"
+        android:text="Small progress each day adds up to big results 🌻"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
+
+</RelativeLayout>

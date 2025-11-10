@@ -2,144 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_glossy_gradient"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_main"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="com.example.studypomodoro.TaskListFragment"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/transparent"
-        app:title=""
-        app:titleTextColor="@android:color/black" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navigation" />
 
-    <TextView
-        android:id="@+id/tv_mode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar_main"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif-condensed"
-        android:text="Focus Mode:"
-        android:textColor="@android:color/black"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tv_task_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_mode"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
-        android:fontFamily="sans-serif-condensed"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        tools:text="Math Chapter 2" />
-
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_centerInParent="true"
-        android:indeterminate="false"
-        android:max="100"
-        android:progress="100"
-        android:progressDrawable="@drawable/circular_progress_bar"
-        android:rotation="-90" />
-
-    <TextView
-        android:id="@+id/tv_timer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:fontFamily="sans-serif-condensed-light"
-        android:text="25:00"
-        android:textColor="@android:color/black"
-        android:textSize="80sp" />
-
-    <LinearLayout
-        android:id="@+id/ll_buttons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/progress_bar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn_start"
-            android:layout_width="120dp"
-            android:layout_height="55dp"
-            android:backgroundTint="#4CAF50"
-            android:text="Start"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/btn_pause"
-            android:layout_width="120dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="16dp"
-            android:backgroundTint="#FF9800"
-            android:text="Pause"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:visibility="gone" />
-
-        <Button
-            android:id="@+id/btn_reset"
-            android:layout_width="120dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="16dp"
-            android:backgroundTint="#F44336"
-            android:text="Reset"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/tv_pomodoros_completed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/ll_bottom_buttons"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="sans-serif-condensed"
-        android:text="Pomodoros Completed: 0"
-        android:textColor="@android:color/black"
-        android:textSize="20sp" />
-
-    <LinearLayout
-        android:id="@+id/ll_bottom_buttons"
-        android:layout_width="wrap_content"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="32dp">
-
-        <Button
-            android:id="@+id/btn_end_session"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#F44336"
-            android:text="End Session"
-            android:textColor="@android:color/white" />
-
-        <Button
-            android:id="@+id/btn_statistics"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:backgroundTint="#FFC107"
-            android:text="Statistics"
-            android:textColor="@android:color/black" />
-    </LinearLayout>
+        app:itemTextAppearanceActive="@style/BottomNavTextStyle"
+        app:itemTextAppearanceInactive="@style/BottomNavTextStyle"
+        app:menu="@menu/bottom_nav_menu" />
 
 </RelativeLayout>
