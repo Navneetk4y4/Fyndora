@@ -21,9 +21,9 @@ class TaskDetailActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
 
     private val clockLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        // This is the callback from MainActivity (the clock screen)
+        // This is the callback from TimerActivity
         if (result.resultCode == Activity.RESULT_OK) {
-            // The task was marked complete. Pass the result back to TaskListActivity.
+            // The task was marked complete. Pass the result back to the calling fragment.
             setResult(Activity.RESULT_OK, result.data)
             finish()
         }
@@ -56,7 +56,7 @@ class TaskDetailActivity : AppCompatActivity() {
             val breakDuration = breakDurationEditText.text.toString().toIntOrNull() ?: 5
             val cycles = cyclesEditText.text.toString().toIntOrNull() ?: 1
 
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, TimerActivity::class.java)
             intent.putExtra("TASK_NAME", taskName)
             intent.putExtra("FOCUS_DURATION", focusDuration)
             intent.putExtra("BREAK_DURATION", breakDuration)

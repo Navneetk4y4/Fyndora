@@ -9,4 +9,10 @@
     <color name="new_green_check">#1ED760</color>
     <color name="new_orange_pending">#FFC107</color>
     <color name="white">#FFFFFF</color>
+
+    <!-- Girlypop Palette -->
+    <color name="pastel_blue">#A2D2FF</color>
+    <color name="subtle_white">#BDBDBD</color>
+    <color name="hint_white">#E0E0E0</color>
+    <color name="icon_inactive">#BDBDBD</color>
 </resources>

@@ -12,7 +12,9 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import java.util.concurrent.TimeUnit
 
 class MusicFragment : Fragment() {
 
@@ -20,10 +22,15 @@ class MusicFragment : Fragment() {
     private var isBound = false
 
     private lateinit var trackTitleTextView: TextView
+    private lateinit var elapsedTimeTextView: TextView
+    private lateinit var totalTimeTextView: TextView
     private lateinit var playPauseButton: ImageButton
     private lateinit var nextButton: ImageButton
     private lateinit var previousButton: ImageButton
+    private lateinit var shuffleButton: ImageButton
+    private lateinit var repeatButton: ImageButton
     private lateinit var seekBar: SeekBar
+    private lateinit var toolbar: Toolbar
 
     private val connection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
@@ -48,10 +55,19 @@ class MusicFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_music, container, false)
 
         trackTitleTextView = view.findViewById(R.id.tv_track_title)
+        elapsedTimeTextView = view.findViewById(R.id.tv_elapsed_time)
+        totalTimeTextView = view.findViewById(R.id.tv_total_time)
         playPauseButton = view.findViewById(R.id.btn_play_pause_music)
         nextButton = view.findViewById(R.id.btn_next_music)
         previousButton = view.findViewById(R.id.btn_previous_music)
+        shuffleButton = view.findViewById(R.id.btn_shuffle)
+        repeatButton = view.findViewById(R.id.btn_repeat)
         seekBar = view.findViewById(R.id.seek_bar)
+        toolbar = view.findViewById(R.id.toolbar_music)
+
+        toolbar.setNavigationOnClickListener {
+            activity?.supportFragmentManager?.popBackStack()
+        }
 
         playPauseButton.setOnClickListener {
             musicService?.playOrPause()
@@ -65,6 +81,16 @@ class MusicFragment : Fragment() {
 
         previousButton.setOnClickListener {
             musicService?.skipToPrevious()
+            updateUI()
+        }
+
+        shuffleButton.setOnClickListener {
+            musicService?.toggleShuffle()
+            updateUI()
+        }
+
+        repeatButton.setOnClickListener {
+            musicService?.toggleRepeat()
             updateUI()
         }
 
@@ -101,18 +127,33 @@ class MusicFragment : Fragment() {
         if (isBound) {
             val track = musicService?.getCurrentTrack()
             trackTitleTextView.text = track?.title
+
             if (musicService?.isPlaying() == true) {
                 playPauseButton.setImageResource(R.drawable.ic_pause)
             } else {
                 playPauseButton.setImageResource(R.drawable.ic_play_arrow)
             }
-            seekBar.max = musicService?.getTrackDuration() ?: 0
+
+            shuffleButton.imageAlpha = if (musicService?.isShuffle() == true) 255 else 128
+            repeatButton.imageAlpha = if (musicService?.isRepeat() == true) 255 else 128
+
+            val duration = musicService?.getTrackDuration() ?: 0
+            seekBar.max = duration
+            totalTimeTextView.text = formatDuration(duration.toLong())
         }
     }
 
     private fun setupProgressListener() {
         musicService?.progressListener = { progress ->
             seekBar.progress = progress
+            elapsedTimeTextView.text = formatDuration(progress.toLong())
         }
+    }
+
+    private fun formatDuration(duration: Long): String {
+        val minutes = TimeUnit.MILLISECONDS.toMinutes(duration)
+        val seconds = TimeUnit.MILLISECONDS.toSeconds(duration) -
+                TimeUnit.MINUTES.toSeconds(minutes)
+        return String.format("%d:%02d", minutes, seconds)
     }
 }

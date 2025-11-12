@@ -37,6 +37,9 @@
         <activity
             android:name=".TaskDetailActivity"
             android:exported="true" />
+        <activity
+            android:name=".TimerActivity"
+            android:exported="true" />
 
         <service android:name=".MusicService" />
 

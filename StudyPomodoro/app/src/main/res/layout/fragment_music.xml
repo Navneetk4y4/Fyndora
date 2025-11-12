@@ -4,24 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_cute_gradient"
+    android:background="@drawable/bg_dreamy_gradient"
     tools:context=".MusicFragment">
 
-    <ImageView
-        android:id="@+id/iv_album_art"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_music"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="@drawable/ic_back_arrow_white"
+        app:title="" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/album_art_card"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:layout_below="@id/toolbar_music"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
-        android:src="@drawable/ic_app_design" />
+        android:layout_marginTop="40dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp">
+
+        <ImageView
+            android:id="@+id/iv_album_art"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img" />
+
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/tv_track_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iv_album_art"
+        android:layout_below="@id/album_art_card"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="sans-serif-medium"
         android:text="Lofi Beats"
         android:textColor="@color/white"
@@ -45,16 +63,44 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_artist_name"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="24dp" />
+        android:layout_marginTop="32dp"
+        android:progressDrawable="@drawable/seekbar_progress_gradient"
+        android:thumbTint="@color/white"/>
+
+    <TextView
+        android:id="@+id/tv_elapsed_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/seek_bar"
+        android:layout_alignStart="@id/seek_bar"
+        android:text="0:00" />
+
+    <TextView
+        android:id="@+id/tv_total_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/seek_bar"
+        android:layout_alignEnd="@id/seek_bar"
+        android:text="0:00" />
 
     <LinearLayout
+        android:id="@+id/playback_controls"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/seek_bar"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="40dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="32dp">
+
+        <ImageButton
+            android:id="@+id/btn_shuffle"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_shuffle"
+            app:tint="@color/white" />
 
         <ImageButton
             android:id="@+id/btn_previous_music"
@@ -65,14 +111,26 @@
             android:src="@drawable/ic_skip_previous"
             app:tint="@color/white" />
 
-        <ImageButton
-            android:id="@+id/btn_play_pause_music"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/ic_play_arrow"
-            app:tint="@color/white" />
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/glowing_background"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:background="@drawable/glowing_circle" />
+
+            <ImageButton
+                android:id="@+id/btn_play_pause_music"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_play_arrow"
+                app:tint="@color/white" />
+
+        </FrameLayout>
 
         <ImageButton
             android:id="@+id/btn_next_music"
@@ -81,6 +139,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:src="@drawable/ic_skip_next"
+            app:tint="@color/white" />
+
+        <ImageButton
+            android:id="@+id/btn_repeat"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_repeat"
             app:tint="@color/white" />
 
     </LinearLayout>

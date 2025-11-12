@@ -15,7 +15,9 @@ class MusicService : Service() {
 
     private var mediaPlayer: MediaPlayer? = null
     private var currentTrackIndex = 0
-    private val tracks = MusicRepository.tracks
+    private var tracks = MusicRepository.tracks
+    private var isShuffle = false
+    private var isRepeat = false
 
     private val binder = MusicBinder()
     private val scope = CoroutineScope(Job() + Dispatchers.Main)
@@ -44,7 +46,11 @@ class MusicService : Service() {
     }
 
     fun skipToNext() {
-        currentTrackIndex = (currentTrackIndex + 1) % tracks.size
+        if (isShuffle) {
+            currentTrackIndex = tracks.indices.random()
+        } else {
+            currentTrackIndex = (currentTrackIndex + 1) % tracks.size
+        }
         playTrack(currentTrackIndex)
     }
 
@@ -56,7 +62,13 @@ class MusicService : Service() {
     private fun playTrack(index: Int) {
         mediaPlayer?.release()
         mediaPlayer = MediaPlayer.create(this, tracks[index].resourceId).apply {
-            setOnCompletionListener { skipToNext() }
+            setOnCompletionListener {
+                if (isRepeat) {
+                    playTrack(currentTrackIndex)
+                } else {
+                    skipToNext()
+                }
+            }
             start()
         }
         startProgressUpdater()
@@ -80,6 +92,18 @@ class MusicService : Service() {
     fun seekTo(position: Int) {
         mediaPlayer?.seekTo(position)
     }
+
+    fun toggleShuffle() {
+        isShuffle = !isShuffle
+    }
+
+    fun toggleRepeat() {
+        isRepeat = !isRepeat
+    }
+
+    fun isShuffle(): Boolean = isShuffle
+
+    fun isRepeat(): Boolean = isRepeat
 
     override fun onDestroy() {
         super.onDestroy()

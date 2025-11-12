@@ -6,15 +6,11 @@
         android:title="Dashboard" />
     <item
         android:id="@+id/navigation_today_task_list"
-        android:icon="@drawable/ic_study_tasks"
+        android:icon="@drawable/ic_today_nav"
         android:title="Today" />
     <item
-        android:id="@+id/navigation_soundscapes"
-        android:icon="@drawable/ic_nav_home"
-        android:title="Soundscapes" />
-    <item
         android:id="@+id/navigation_music"
-        android:icon="@drawable/ic_study_tasks"
+        android:icon="@drawable/ic_music_nav"
         android:title="Music" />
     <item
         android:id="@+id/navigation_profile"
