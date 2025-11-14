@@ -31,7 +31,6 @@ class TodayTaskListFragment : Fragment() {
     private lateinit var monthYearTextView: TextView
     private lateinit var searchEditText: EditText
     private lateinit var searchIcon: ImageView
-    private val allTasks = mutableListOf<Task>()
     private lateinit var tasksAdapter: TasksAdapter
     private val selectedDate = Calendar.getInstance()
 
@@ -39,7 +38,7 @@ class TodayTaskListFragment : Fragment() {
         if (result.resultCode == Activity.RESULT_OK) {
             val taskName = result.data?.getStringExtra("COMPLETED_TASK_NAME")
             if (taskName != null) {
-                val task = allTasks.find { it.name == taskName }
+                val task = TaskRepository.allTasks.find { it.name == taskName }
                 task?.status = R.drawable.ic_task_status_completed_new
                 filterTasks(selectedDate)
             }
@@ -60,7 +59,6 @@ class TodayTaskListFragment : Fragment() {
         searchEditText = view.findViewById(R.id.et_search)
         searchIcon = view.findViewById(R.id.iv_search)
 
-        createSampleTasks()
         updateMonthYearTextView()
         setupWeekView()
         setupTasksRecyclerView()
@@ -86,18 +84,6 @@ class TodayTaskListFragment : Fragment() {
         }
 
         return view
-    }
-
-    private fun createSampleTasks() {
-        val today = Calendar.getInstance()
-        val tomorrow = Calendar.getInstance()
-        tomorrow.add(Calendar.DAY_OF_YEAR, 1)
-
-        allTasks.add(Task(R.drawable.ic_task_status_completed_new, "UX Member Payment", "Microsoft Product Design", "09:20 am", today))
-        allTasks.add(Task(R.drawable.ic_task_status_completed_new, "Email Reply & Testing", "For Green Project", "10:20 am", today))
-        allTasks.add(Task(R.drawable.ic_task_status_in_progress_new, "NDA Review & Reply", "For Website Project", "11:30 pm", today))
-        allTasks.add(Task(R.drawable.ic_task_status_pending, "Interview User Flow", "Google User", "14:00 pm", today))
-        allTasks.add(Task(R.drawable.ic_task_status_pending, "Complete the UI", "Android Project", "10:00 am", tomorrow))
     }
 
     private fun updateMonthYearTextView() {
@@ -151,7 +137,7 @@ class TodayTaskListFragment : Fragment() {
     }
 
     private fun filterTasks(date: Calendar, query: String? = null) {
-        var filteredTasks = allTasks.filter { 
+        var filteredTasks = TaskRepository.allTasks.filter { 
             it.date.get(Calendar.YEAR) == date.get(Calendar.YEAR) && 
             it.date.get(Calendar.DAY_OF_YEAR) == date.get(Calendar.DAY_OF_YEAR) 
         }
@@ -190,7 +176,7 @@ class TodayTaskListFragment : Fragment() {
             .setPositiveButton("Add") { _, _ ->
                 val taskName = taskNameEditText.text.toString()
                 if (taskName.isNotEmpty()) {
-                    allTasks.add(Task(R.drawable.ic_task_status_pending, taskName, "General", "Now", selectedDate.clone() as Calendar))
+                    TaskRepository.allTasks.add(Task(R.drawable.ic_task_status_pending, taskName, "General", "Now", selectedDate.clone() as Calendar))
                     filterTasks(selectedDate)
                 }
             }

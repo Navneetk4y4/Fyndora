@@ -2,5 +2,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <!-- This is a placeholder file to prevent build errors. It is not used in the app. -->
+    <!-- This file is obsolete and not used in the app. -->
 </RelativeLayout>

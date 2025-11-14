@@ -1,7 +1,7 @@
 package com.example.studypomodoro
 
-import android.content.Intent
 import android.os.Bundle
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView

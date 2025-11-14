@@ -1,64 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/new_background">
+    android:background="@color/new_background"
+    android:padding="24dp"
+    android:orientation="vertical"
+    tools:context=".TaskListFragment">
 
+    <!-- Greeting -->
     <TextView
         android:id="@+id/tv_greeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="48dp"
         android:text="Hi David King"
         android:textColor="@color/new_text_primary"
         android:textSize="28sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginTop="32dp"/>
 
+    <!-- Subtitle -->
     <TextView
         android:id="@+id/tv_greeting_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_greeting"
-        android:layout_alignStart="@id/tv_greeting"
-        android:text="Today your task list"
+        android:text="Let's make today productive!"
         android:textColor="@color/new_text_secondary"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp"/>
 
-    <EditText
-        android:id="@+id/et_search"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/tv_greeting_subtitle"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/bg_search_bar"
-        android:drawableStart="@drawable/ic_new_search"
-        android:drawablePadding="12dp"
-        android:hint="Search task"
-        android:paddingHorizontal="20dp" />
-
-    <TextView
-        android:id="@+id/tv_projects_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/et_search"
-        android:layout_alignStart="@id/tv_greeting"
-        android:layout_marginTop="32dp"
-        android:text="Projects"
-        android:textColor="@color/new_text_primary"
-        android:textSize="22sp"
-        android:textStyle="bold" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_projects"
+    <!-- Tasks Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_tasks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_projects_title"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        android:paddingHorizontal="24dp" />
+        android:layout_marginBottom="20dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="8dp">
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:background="@drawable/bg_blue_card">
+
+            <TextView
+                android:id="@+id/tv_card_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Today's Tasks"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_today_tasks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Motivation Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_motivation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        android:layout_marginBottom="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="24dp"
+            android:background="@drawable/bg_blue_card">
+
+            <TextView
+                android:id="@+id/tv_motivational_quote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="“The secret of getting ahead is getting started.”\n- Mark Twain"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textAlignment="center"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

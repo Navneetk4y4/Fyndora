@@ -7,33 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ProjectsAdapter(private val projects: List<Project>) : RecyclerView.Adapter<ProjectsAdapter.ProjectViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_project_card, parent, false)
-        return ProjectViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: ProjectViewHolder, position: Int) {
-        val project = projects[position]
-        holder.bind(project)
-    }
-
-    override fun getItemCount() = projects.size
-
-    class ProjectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val projectIcon: ImageView = itemView.findViewById(R.id.iv_project_icon)
-        private val projectTaskCount: TextView = itemView.findViewById(R.id.tv_project_task_count)
-        private val projectTitle: TextView = itemView.findViewById(R.id.tv_project_title)
-
-        fun bind(project: Project) {
-            projectIcon.setImageResource(project.icon)
-            projectTaskCount.text = project.taskCount
-            projectTitle.text = project.title
-        }
-    }
-}
-
+// Adapter for the interactive task list on the "Today" screen
 class TasksAdapter(
     private var tasks: MutableList<Task>,
     private val onTaskClick: (Task) -> Unit
@@ -74,6 +48,30 @@ class TasksAdapter(
 
             timelineTop.visibility = if (isFirst) View.INVISIBLE else View.VISIBLE
             timelineBottom.visibility = if (isLast) View.INVISIBLE else View.VISIBLE
+        }
+    }
+}
+
+// Adapter for the display-only task list on the Dashboard
+class DashboardTasksAdapter(private var tasks: List<Task>) : RecyclerView.Adapter<DashboardTasksAdapter.DashboardTaskViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DashboardTaskViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_dashboard_task, parent, false)
+        return DashboardTaskViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: DashboardTaskViewHolder, position: Int) {
+        val task = tasks[position]
+        holder.bind(task)
+    }
+
+    override fun getItemCount() = tasks.size
+
+    class DashboardTaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val taskName: TextView = itemView.findViewById(R.id.tv_dashboard_task_name)
+
+        fun bind(task: Task) {
+            taskName.text = "• ${task.name}"
         }
     }
 }
