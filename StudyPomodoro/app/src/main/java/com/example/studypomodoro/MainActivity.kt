@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.navigation_dashboard -> selectedFragment = TaskListFragment()
                 R.id.navigation_today_task_list -> selectedFragment = TodayTaskListFragment()
-                R.id.navigation_soundscapes -> selectedFragment = SoundscapesFragment()
                 R.id.navigation_music -> selectedFragment = MusicFragment()
                 R.id.navigation_profile -> selectedFragment = ProfileFragment()
                 R.id.navigation_statistics -> selectedFragment = StatisticsFragment()
